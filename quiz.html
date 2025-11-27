@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Sanitasi Tempat Wisata</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe, #f1f5f9 40%, #e2e8f0);
+      color: #0f172a;
+    }
+    header {
+      background: rgba(15,23,42,0.9);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      backdrop-filter: blur(10px);
+    }
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 1.5rem;
+    }
+    section {
+      background: white;
+      padding: 1rem;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .correct-answer {
+      margin-top: 5px;
+      padding: 8px;
+      background: #dcfce7;
+      color: #166534;
+      border-left: 5px solid #16a34a;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .wrong {
+      background: #fee2e2 !important;
+    }
+
+    button {
+      background: #0f766e;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background: #0d5f58;
+    }
+
+    #quizResult {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      display: none;
+      background: #e2e8f0;
+      font-weight: bold;
+    }
+
+    a {
+      color: #0f766e;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>🎯 Kuis Sanitasi Tempat Wisata</header>
+
+<main>
+
+<section>
+  <h2>Jawablah Semua Pertanyaan</h2>
+
+  <form id="quizForm">
+
+    <!-- Soal dibuat otomatis lewat JavaScript -->
+    <div id="quizContainer"></div>
+
+    <button type="button" onclick="hitungQuiz()">Lihat Hasil</button>
+  </form>
+
+  <div id="quizResult"></div>
+
+  <br>
+  <a href="index.html">← Kembali ke Beranda</a>
+</section>
+
+</main>
+
+
+<script>
+// ===========================
+// DAFTAR SOAL (10 soal)
+// ===========================
+const questions = [
+  {
+    q: "Apa faktor paling penting dalam sanitasi wisata?",
+    options: ["Spot foto bagus", "Harga tiket murah", "Toilet & Kebersihan", "Tempat parkir luas"],
+    correct: 2
+  },
+  {
+    q: "Apa prinsip utama pengelolaan sampah?",
+    options: ["Buang langsung ke laut", "Kubur di pasir", "3R (Reduce, Reuse, Recycle)", "Biarkan saja"],
+    correct: 2
+  },
+  {
+    q: "Air bersih yang aman tidak boleh...",
+    options: ["Berbau", "Berwarna", "Keruh", "Semua benar"],
+    correct: 3
+  },
+  {
+    q: "Genangan air dapat menjadi tempat perkembangbiakan...",
+    options: ["Burung", "Nyamuk", "Kucing", "Ikan kecil"],
+    correct: 1
+  },
+  {
+    q: "Pedagang makanan harus menjaga...",
+    options: ["Kebersihan alat & bahan", "Hiasan makanan saja", "Harga tetap murah", "Dekorasi kios"],
+    correct: 0
+  },
+  {
+    q: "Sampah organik termasuk...",
+    options: ["Botol plastik", "Kulit buah", "Kertas laminasi", "Kaleng minuman"],
+    correct: 1
+  },
+  {
+    q: "Tujuan drainase adalah untuk...",
+    options: ["Membuat jalan licin", "Mencegah genangan", "Menampung sampah", "Meninggikan tanah"],
+    correct: 1
+  },
+  {
+    q: "Limbah cair dari toilet sebaiknya dibuang ke...",
+    options: ["Sungai terdekat", "Laut", "Septic tank / IPAL", "Jalan raya"],
+    correct: 2
+  },
+  {
+    q: "Apa yang harus tersedia di toilet umum?",
+    options: ["AC", "Sabun cuci tangan", "TV kecil", "Pengeras suara"],
+    correct: 1
+  },
+  {
+    q: "Apa contoh perilaku baik pengunjung?",
+    options: ["Buang sampah sembarangan", "Merokok di area ramai", "Membuang sampah pada tempatnya", "Mengotori toilet"],
+    correct: 2
+  }
+];
+
+
+// ===========================
+// RENDER SOAL KE HTML
+// ===========================
+const quizContainer = document.getElementById("quizContainer");
+
+questions.forEach((item, index) => {
+  let html = `
+    <div class="question-block" id="qblock${index}">
+      <p><b>${index+1}. ${item.q}</b></p>
+  `;
+
+  item.options.forEach((opt, i) => {
+    html += `
+      <label>
+        <input type="radio" name="q${index}" value="${i}">
+        ${opt}
+      </label><br>
+    `;
+  });
+
+  html += `
+      <div class="correct-answer" id="answer${index}">
+        ✔ Jawaban benar: <b>${item.options[item.correct]}</b>
+      </div>
+    </div>
+    <br>
+  `;
+
+  quizContainer.innerHTML += html;
+});
+
+
+// ===========================
+// FUNGSI HITUNG HASIL
+// ===========================
+function hitungQuiz() {
+  let score = 0;
+
+  questions.forEach((item, index) => {
+    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+    const answerBox = document.getElementById(`answer${index}`);
+    const block = document.getElementById(`qblock${index}`);
+
+    if (selected) {
+      if (parseInt(selected.value) === item.correct) {
+        score++;
+      } else {
+        block.classList.add("wrong");
+        answerBox.style.display = "block"; // tampilkan jawaban benar
+      }
+    } else {
+      // jika tidak menjawab → dianggap salah & tampilkan jawaban
+      block.classList.add("wrong");
+      answerBox.style.display = "block";
+    }
+  });
+
+  let percent = (score / questions.length) * 100;
+  let resultText =
+    percent >= 80 ? "🟢 Sangat Baik!" :
+    percent >= 60 ? "🟡 Cukup Baik" :
+    percent >= 40 ? "🟠 Kurang" :
+    "🔴 Sangat Kurang";
+
+  let box = document.getElementById("quizResult");
+  box.style.display = "block";
+  box.innerHTML = `Skor Anda: <b>${percent.toFixed(0)}%</b><br>${resultText}`;
+}
+</script>
+
+</body>
+</html>

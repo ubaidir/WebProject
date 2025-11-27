@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Informasi Sanitasi Lingkungan Tempat Wisata di Makassar</title>
+  <style>
+    :root {
+      --primary: #0f766e;
+      --primary-soft: #ccfbf1;
+      --accent: #f97316;
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --danger: #dc2626;
+      --warning: #eab308;
+      --success: #16a34a;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #e0f2fe, #f1f5f9 40%, #e2e8f0);
+      color: var(--text-main);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      color: #e5e7eb;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .brand span.logo-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #a5f3fc, #0f766e);
+      display: inline-block;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    nav a {
+      color: #e5e7eb;
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover {
+      background: rgba(148, 163, 184, 0.4);
+      color: #f9fafb;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 2rem;
+      align-items: center;
+      margin-top: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(8, 47, 73, 0.08);
+      color: var(--primary);
+      border: 1px solid rgba(45, 212, 191, 0.5);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      margin: 0.4rem 0 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .hero-pill {
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: #ecfeff;
+      border: 1px solid #a5f3fc;
+      color: #0f172a;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, #0f172a, #0f766e);
+      color: white;
+      border-radius: 18px;
+      padding: 1.3rem 1.2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.4);
+    }
+
+    .hero-card h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    .hero-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #e5e7eb;
+    }
+
+    .score-badges {
+      display: flex;
+      gap: 0.75rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .score {
+      background: rgba(15, 23, 42, 0.4);
+      border-radius: 999px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .score span.value {
+      font-weight: 700;
+    }
+
+    .hero-gradient-circle {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.5), transparent);
+      bottom: -60px;
+      right: -60px;
+      opacity: 0.7;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    section p.section-desc {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 1rem 1rem 0.9rem;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e2e8f0;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-top: 0;
+      margin-bottom: 0.35rem;
+    }
+
+    .card small {
+      display: block;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+      margin-bottom: 0.2rem;
+      font-size: 0.8rem;
+    }
+
+    .chip {
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .chip.green { border-color: #bbf7d0; color: #166534; }
+    .chip.yellow{ border-color: #facc15; color: #92400e; }
+    .chip.red   { border-color: #fecaca; color: #b91c1c; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.75rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: #064e3b;
+      margin-top: 0.3rem;
+    }
+
+    .table-wrapper {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 0.75rem 0.75rem 0.4rem;
+      border: 1px solid #e2e8f0;
+      overflow-x: auto;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 600px;
+    }
+
+    thead {
+      background: #e5f9f6;
+    }
+
+    th, td {
+      padding: 0.5rem 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #0f172a;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .status {
+      font-weight: 600;
+      font-size: 0.78rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .status-good {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status-medium {
+      background: #fef9c3;
+      color: #92400e;
+    }
+
+    .status-bad {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    form {
+      display: grid;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-weight: 500;
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 0.4rem 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5f5;
+      font-size: 0.9rem;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 36px;
+    }
+
+    textarea {
+      min-height: 70px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.75rem;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 0.5rem 1.2rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0d615b;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-card {
+        order: -1;
+      }
+      nav ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <div class="brand">
+      <span class="logo-dot"></span>
+      <span>SaniWisata • Makassar</span>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#kategori">Kategori</a></li>
+        <li><a href="#data">Data</a></li>
+        <li><a href="#rekomendasi">Rekomendasi</a></li>
+
+        <!-- Tambahan -->
+        <li><a href="quiz.html">Kuis</a></li>
+        <li><a href="bmi.html">Cek BMI</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge">🌱 Website Tugas • Sanitasi Lingkungan</div>
+
+      <h1 class="hero-title">Website Informasi Sanitasi Lingkungan<br>Tempat Wisata di Makassar</h1>
+
+      <p>
+        Website ini berisi profil sanitasi lingkungan pada berbagai tempat wisata 
+        di Kota Makassar, meliputi air bersih, toilet, sampah, drainase, 
+        limbah cair, keamanan pangan, dan higiene lingkungan.
+      </p>
+
+      <div class="hero-highlights">
+        <span class="hero-pill">🧼 Kebersihan Toilet</span>
+        <span class="hero-pill">🚮 Pengelolaan Sampah</span>
+        <span class="hero-pill">💧 Kualitas Air Bersih</span>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <h2>Ringkasan Sanitasi</h2>
+      <p>
+        Setiap tempat wisata dinilai berdasarkan beberapa indikator sanitasi
+        untuk menciptakan wisata yang sehat dan nyaman.
+      </p>
+
+      <div class="score-badges">
+        <div class="score"><span>🟢 Baik</span><span class="value">≥ 80</span></div>
+        <div class="score"><span>🟡 Cukup</span><span class="value">60–79</span></div>
+        <div class="score"><span>🔴 Kurang</span><span class="value">&lt; 60</span></div>
+      </div>
+
+      <div class="hero-gradient-circle"></div>
+    </aside>
+  </section>
+
+  <!-- TENTANG -->
+  <section id="tentang">
+    <h2>Tentang Website</h2>
+    <p class="section-desc">
+      Website ini digunakan untuk memberikan gambaran kondisi sanitasi
+      pada beberapa titik wisata di Makassar. Fokus utama adalah edukasi
+      mengenai kebersihan lingkungan wisata.
+    </p>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Tujuan</h3>
+        <p style="font-size: 0.9rem;">
+          Memberikan gambaran umum kondisi sanitasi, masalah yang ditemukan,
+          dan rekomendasi perbaikan.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Ruang Lingkup</h3>
+        <p style="font-size: 0.9rem;">
+          Air bersih, toilet, sampah, drainase, limbah cair, keamanan pangan, 
+          higiene, dan perilaku pengunjung.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Sasaran</h3>
+        <p style="font-size: 0.9rem;">
+          Mahasiswa, pengunjung wisata, pengelola wisata, dan masyarakat umum.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATEGORI SANITASI -->
+  <section id="kategori">
+    <h2>Kategori Penilaian Sanitasi</h2>
+    <p class="section-desc">Daftar aspek yang dievaluasi dalam sanitasi tempat wisata.</p>
+
+    <div class="grid grid-3">
+
+      <div class="card">
+        <h3>1. Gambaran Umum</h3>
+        <small>Jenis & kepadatan pengunjung</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Jenis wisata</li>
+          <li>Jumlah pengunjung</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>2. Sanitasi Air Bersih</h3>
+        <small>Ketersediaan kualitas air</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Sumber air</li>
+          <li>Kualitas fisik</li>
+          <li>Distribusi air</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>3. Toilet & Fasilitas Umum</h3>
+        <small>Kenyamanan & kebersihan</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Jumlah toilet</li>
+          <li>Kebersihan</li>
+          <li>Sarana cuci tangan</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>4. Pengelolaan Sampah</h3>
+        <small>Pisah, kumpul, angkut</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Ketersediaan tempat sampah</li>
+          <li>3R (Reduce, Reuse, Recycle)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>5. Drainase</h3>
+        <small>Genangan & nyamuk</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Saluran air</li>
+          <li>Potensi nyamuk</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>6. Limbah Cair</h3>
+        <small>Pembuangan & pengolahan</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Limbah toilet</li>
+          <li>Limbah pedagang</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>7. Keamanan Pangan</h3>
+        <small>Jika ada pedagang</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Kebersihan alat</li>
+          <li>Penutup makanan</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>8. Higiene Lingkungan</h3>
+        <small>Kebersihan area umum</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Spot foto</li>
+          <li>Kebersihan gazebo</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>9. Perilaku Pengunjung</h3>
+        <small>Kebiasaan & kepatuhan</small>
+        <ul style="padding-left:1.1rem;font-size:0.85rem;">
+          <li>Membuang sampah</li>
+          <li>Kepatuhan aturan</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA TEMPAT WISATA -->
+  <section id="data">
+    <h2>Contoh Data Sanitasi</h2>
+    <p class="section-desc">Contoh tabel data survei sanitasi.</p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Tempat</th>
+            <th>Jenis</th>
+            <th>Air</th>
+            <th>Toilet</th>
+            <th>Sampah</th>
+            <th>Drainase</th>
+            <th>Pangan</th>
+            <th>Skor</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pantai Losari</td>
+            <td>Pantai</td>
+            <td>Baik</td>
+            <td>Cukup</td>
+            <td>Kurang</td>
+            <td>Baik</td>
+            <td>Cukup</td>
+            <td>82</td>
+            <td><span class="status status-good">Cukup</span></td>
+          </tr>
+          <tr>
+            <td>Pantai Bosowa</td>
+            <td>Pantai</td>
+            <td>Cukup</td>
+            <td>Cukup</td>
+            <td>Kurang</td>
+            <td>Kurang</td>
+            <td>Cukup</td>
+            <td>60</td>
+            <td><span class="status status-medium">Cukup</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- REKOMENDASI -->
+  <section id="rekomendasi">
+    <h2>Rekomendasi Sanitasi</h2>
+
+    <div class="grid grid-2">
+
+      <div class="card">
+        <h3>Untuk Pengelola</h3>
+        <p style="font-size:0.9rem;">
+          • Tambah toilet<br>
+          • Tempat sampah terpilah<br>
+          • Perbaikan drainase<br>
+          • IPAL / Septic tank layak
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Untuk Pengunjung</h3>
+        <p style="font-size:0.9rem;">
+          • Buang sampah pada tempatnya<br>
+          • Jaga kebersihan toilet<br>
+          • Cuci tangan sebelum makan<br>
+          • Kurangi plastik
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+</main>
+
+<footer>
+  &copy; 2025 • Website Informasi Sanitasi Tempat Wisata di Makassar<br>
+  By Kelompok 6 matakuliah pengantar teknologi informasi jurusan kesehatan lingkungan
+</footer>
+
+</body>
+</html>

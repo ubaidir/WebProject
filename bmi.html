@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cek BMI – Tinggi & Berat Badan</title>
+
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #e0f2fe, #f1f5f9 40%, #e2e8f0);
+      margin: 0;
+      font-family: system-ui;
+      color: #0f172a;
+    }
+    header {
+      background: rgba(15,23,42,0.9);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      backdrop-filter: blur(10px);
+    }
+    main {
+      max-width: 600px;
+      margin: auto;
+      padding: 1.5rem;
+    }
+    section {
+      background: white;
+      padding: 1rem;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      margin-bottom: 0.8rem;
+    }
+    button {
+      background: #0f766e;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #0d5f58;
+    }
+    #bmiResult {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      background: #dbeafe;
+      display: none;
+      font-weight: bold;
+    }
+    a {
+      color: #0f766e;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>⚖️ Cek BMI – Tinggi & Berat Badan</header>
+
+<main>
+
+<section>
+
+  <label>Tinggi Badan (cm)</label>
+  <input type="number" id="tinggi" placeholder="contoh: 170">
+
+  <label>Berat Badan (kg)</label>
+  <input type="number" id="berat" placeholder="contoh: 60">
+
+  <button onclick="calcBMI()">Hitung BMI</button>
+
+  <div id="bmiResult"></div>
+
+  <br>
+  <a href="index.html">← Kembali ke Beranda</a>
+
+</section>
+
+</main>
+
+<script>
+function calcBMI() {
+  let t = parseFloat(document.getElementById("tinggi").value);
+  let b = parseFloat(document.getElementById("berat").value);
+
+  if (!t || !b) {
+    alert("Masukkan data yang valid!");
+    return;
+  }
+
+  let meter = t / 100;
+  let bmi = (b / (meter * meter)).toFixed(1);
+
+  let kategori = 
+    bmi < 18.5 ? "Kurus" :
+    bmi < 25 ? "Normal" :
+    bmi < 30 ? "Gemuk" : "Obesitas";
+
+  let box = document.getElementById("bmiResult");
+  box.style.display = "block";
+  box.innerHTML = `BMI Anda: <b>${bmi}</b><br>Kategori: <b>${kategori}</b>`;
+}
+</script>
+
+</body>
+</html>
