@@ -46,6 +46,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.75rem;
     }
 
     .brand {
@@ -55,6 +56,7 @@
       align-items: center;
       gap: 0.5rem;
       font-size: 0.95rem;
+      flex-shrink: 0;
     }
 
     .brand span.logo-dot {
@@ -72,6 +74,8 @@
       margin: 0;
       padding: 0;
       font-size: 0.9rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     nav a {
@@ -80,6 +84,7 @@
       padding: 0.25rem 0.5rem;
       border-radius: 999px;
       transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
     }
 
     nav a:hover {
@@ -166,6 +171,7 @@
 
     .score-badges {
       display: flex;
+      flex-wrap: wrap;
       gap: 0.75rem;
       margin: 1rem 0 0.5rem;
     }
@@ -280,7 +286,7 @@
     .table-wrapper {
       background: var(--card-bg);
       border-radius: 14px;
-      padding: 0.75rem 0.75rem 0.4rem;
+      padding: 0.75rem;
       border: 1px solid #e2e8f0;
       overflow-x: auto;
       box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
@@ -336,58 +342,6 @@
       color: #b91c1c;
     }
 
-    form {
-      display: grid;
-      gap: 0.75rem;
-      font-size: 0.9rem;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.2rem;
-      font-weight: 500;
-    }
-
-    input[type="text"], select, textarea {
-      width: 100%;
-      padding: 0.4rem 0.5rem;
-      border-radius: 8px;
-      border: 1px solid #cbd5f5;
-      font-size: 0.9rem;
-      font-family: inherit;
-      resize: vertical;
-      min-height: 36px;
-    }
-
-    textarea {
-      min-height: 70px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 0.75rem;
-    }
-
-    button {
-      border: none;
-      border-radius: 999px;
-      padding: 0.5rem 1.2rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-      font-weight: 600;
-      margin-top: 0.25rem;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: #0d615b;
-    }
-
     footer {
       text-align: center;
       font-size: 0.8rem;
@@ -397,15 +351,59 @@
       border-top: 1px solid #e5e7eb;
     }
 
+    /* Responsif smartphone */
     @media (max-width: 800px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.6rem 0.75rem;
+      }
+
+      nav ul {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+        overflow-x: auto;
+      }
+
       .hero {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
       }
+
       .hero-card {
         order: -1;
+        padding: 1.1rem 1rem;
       }
+
+      .hero-title {
+        font-size: 1.7rem;
+      }
+
+      main {
+        padding: 1.25rem 0.9rem 2.25rem;
+      }
+
+      .card {
+        padding: 0.9rem 0.9rem 0.8rem;
+      }
+
+      section h2 {
+        font-size: 1.15rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.5rem;
+      }
+
       nav ul {
-        display: none;
+        font-size: 0.75rem;
       }
     }
   </style>
@@ -425,8 +423,6 @@
         <li><a href="#kategori">Kategori</a></li>
         <li><a href="#data">Data</a></li>
         <li><a href="#rekomendasi">Rekomendasi</a></li>
-
-        <!-- Tambahan -->
         <li><a href="quiz.html">Kuis</a></li>
         <li><a href="bmi.html">Cek BMI</a></li>
       </ul>
@@ -437,7 +433,6 @@
 
 <main>
 
-  <!-- HERO -->
   <section class="hero">
     <div>
       <div class="hero-badge">🌱 Website Tugas • Sanitasi Lingkungan</div>
@@ -446,7 +441,7 @@
 
       <p>
         Website ini berisi profil sanitasi lingkungan pada berbagai tempat wisata 
-        di Kota Makassar, meliputi air bersih, toilet, sampah, drainase, 
+        di Kota Makassar. Meliputi air bersih, toilet, sampah, drainase, 
         limbah cair, keamanan pangan, dan higiene lingkungan.
       </p>
 
@@ -474,11 +469,10 @@
     </aside>
   </section>
 
-  <!-- TENTANG -->
   <section id="tentang">
     <h2>Tentang Website</h2>
     <p class="section-desc">
-      Website ini digunakan untuk memberikan gambaran kondisi sanitasi
+      Website ini memberikan gambaran kondisi sanitasi
       pada beberapa titik wisata di Makassar. Fokus utama adalah edukasi
       mengenai kebersihan lingkungan wisata.
     </p>
@@ -509,7 +503,6 @@
     </div>
   </section>
 
-  <!-- KATEGORI SANITASI -->
   <section id="kategori">
     <h2>Kategori Penilaian Sanitasi</h2>
     <p class="section-desc">Daftar aspek yang dievaluasi dalam sanitasi tempat wisata.</p>
@@ -518,7 +511,7 @@
 
       <div class="card">
         <h3>1. Gambaran Umum</h3>
-        <small>Jenis & kepadatan pengunjung</small>
+        <small>Jenis dan kepadatan pengunjung</small>
         <ul style="padding-left:1.1rem;font-size:0.85rem;">
           <li>Jenis wisata</li>
           <li>Jumlah pengunjung</li>
@@ -536,8 +529,8 @@
       </div>
 
       <div class="card">
-        <h3>3. Toilet & Fasilitas Umum</h3>
-        <small>Kenyamanan & kebersihan</small>
+        <h3>3. Toilet dan Fasilitas Umum</h3>
+        <small>Kenyamanan dan kebersihan</small>
         <ul style="padding-left:1.1rem;font-size:0.85rem;">
           <li>Jumlah toilet</li>
           <li>Kebersihan</li>
@@ -556,7 +549,7 @@
 
       <div class="card">
         <h3>5. Drainase</h3>
-        <small>Genangan & nyamuk</small>
+        <small>Genangan dan nyamuk</small>
         <ul style="padding-left:1.1rem;font-size:0.85rem;">
           <li>Saluran air</li>
           <li>Potensi nyamuk</li>
@@ -565,7 +558,7 @@
 
       <div class="card">
         <h3>6. Limbah Cair</h3>
-        <small>Pembuangan & pengolahan</small>
+        <small>Pembuangan dan pengolahan</small>
         <ul style="padding-left:1.1rem;font-size:0.85rem;">
           <li>Limbah toilet</li>
           <li>Limbah pedagang</li>
@@ -592,7 +585,7 @@
 
       <div class="card">
         <h3>9. Perilaku Pengunjung</h3>
-        <small>Kebiasaan & kepatuhan</small>
+        <small>Kebiasaan dan kepatuhan</small>
         <ul style="padding-left:1.1rem;font-size:0.85rem;">
           <li>Membuang sampah</li>
           <li>Kepatuhan aturan</li>
@@ -601,7 +594,6 @@
     </div>
   </section>
 
-  <!-- DATA TEMPAT WISATA -->
   <section id="data">
     <h2>Contoh Data Sanitasi</h2>
     <p class="section-desc">Contoh tabel data survei sanitasi.</p>
@@ -649,7 +641,6 @@
     </div>
   </section>
 
-  <!-- REKOMENDASI -->
   <section id="rekomendasi">
     <h2>Rekomendasi Sanitasi</h2>
 
@@ -661,7 +652,7 @@
           • Tambah toilet<br>
           • Tempat sampah terpilah<br>
           • Perbaikan drainase<br>
-          • IPAL / Septic tank layak
+          • IPAL atau septic tank layak
         </p>
       </div>
 
@@ -679,13 +670,11 @@
 
   </section>
 
-
-
 </main>
 
 <footer>
   &copy; 2025 • Website Informasi Sanitasi Tempat Wisata di Makassar<br>
-  By Kelompok 6 matakuliah pengantar teknologi informasi jurusan kesehatan lingkungan
+  By Kelompok 6 Matakuliah Pengantar Teknologi Informasi
 </footer>
 
 </body>
